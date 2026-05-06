@@ -18,8 +18,8 @@ Ikuti langkah-langkah berikut untuk menjalankan BatikPedia di komputer Anda:
    Buka folder hasil clone tersebut di Visual Studio Code.
 3. Install Dependencies (Mesin Penggerak)
    Buka Terminal di dalam VS Code (pilih Command Prompt), lalu ketik perintah ini dan tekan Enter:
-   npm install
+   ```npm install```
   (Catatan: Perintah ini akan otomatis mendownload Electron.js dan semua kebutuhan lainnya yang terdaftar di package.json)
 4. Jalankan Aplikasi
    Setelah proses install selesai, ketik perintah ini untuk membuka aplikasinya:
-   npm start
+  ``` npm start```
