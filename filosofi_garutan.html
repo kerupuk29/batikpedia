@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Filosofi Garutan - BatikPedia</title>
+    <style>
+        /* Gaya Dasar */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        /* Navbar - Biru tanpa garis tepi */
+        nav {
+            background-color: #8bb8ff; 
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav h2 { 
+            margin: 0; 
+            font-size: 28px; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        nav div a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            padding-bottom: 5px;
+        }
+        nav div a.active {
+            border-bottom: 3px solid white;
+        }
+
+        /* Wadah Video Utama (Sesuai Storyboard Minimalis) */
+        .video-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        video {
+            width: 800px; /* Ukuran video besar di tengah layar */
+            max-width: 90%;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            background-color: #000; /* Warna dasar hitam kalau video belum play */
+            margin-bottom: 30px;
+        }
+
+        .video-container h2 {
+            font-size: 32px;
+            margin: 0 0 15px 0;
+        }
+
+        .link-kembali {
+            font-size: 16px;
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s;
+        }
+        
+        .link-kembali:hover {
+            color: #1a8cff;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #e0e0e0;
+            padding: 30px 50px;
+            text-align: left;
+            margin-top: 40px;
+        }
+        footer h3 { margin: 0 0 5px 0; }
+        footer p { margin: 0; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <h2>BatikPedia</h2>
+        <div>
+            <a href="index.html">Beranda</a>
+            <a href="galeri.html">Galeri Motif</a>
+            <a href="#" class="active">Filosofi Batik</a> <!-- Active pindah ke sini -->
+            <a href="tentang.html">Tentang</a>
+        </div>
+    </nav>
+
+    <!-- Seksi Pemutar Video -->
+    <div class="video-container">
+        <!-- Pastikan lu punya file video bernama video_garutan.mp4 -->
+        <video controls autoplay>
+            <source src="video_garutan.mp4" type="video/mp4">
+            Browser Anda tidak mendukung pemutar video.
+        </video>
+
+        <h2>Batik Garutan</h2>
+        
+        <!-- Tautan cepat untuk navigasi kembali ke galeri -->
+        <a href="galeri.html" class="link-kembali">Lihat motif lainnya ➔</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <h3>BatikPedia</h3>
+        <p>2026 Batik Khas Jawa Barat</p>
+    </footer>
+
+</body>
+</html>

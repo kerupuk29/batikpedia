@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Tentang - BatikPedia</title>
+    <style>
+        /* Gaya Dasar */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        /* Navbar - Biru tanpa garis tepi */
+        nav {
+            background-color: #8bb8ff; 
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav h2 { 
+            margin: 0; 
+            font-size: 28px; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        nav div a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            padding-bottom: 5px;
+        }
+        nav div a.active {
+            border-bottom: 3px solid white;
+        }
+
+        /* Wadah Utama Konten */
+        .tentang-container {
+            padding: 60px 50px;
+            text-align: center;
+        }
+
+        /* Judul Seksi */
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: #222;
+        }
+
+        /* Grid Tim Pengembang (3 Kolom, 2 Baris) */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto 80px auto; /* Margin bawah buat jarak ke Tujuan Proyek */
+        }
+        
+        .member {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .member img {
+            width: 150px;
+            height: 150px;
+            background-color: #ccc; /* Warna abu-abu kalau foto belum ada */
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            margin-bottom: 15px;
+        }
+
+        .member h4 {
+            margin: 0 0 5px 0;
+            font-size: 18px;
+        }
+
+        .member p {
+            margin: 0;
+            font-size: 14px;
+            color: #619afc; /* Warna biru sesuai desain Figma */
+            font-weight: bold;
+        }
+
+        /* Seksi Tujuan Proyek */
+        .purpose-box {
+            background-color: #8bb8ff; /* Kotak warna biru */
+            color: black;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 0; /* Desain Figma kotaknya kotak tegas (tidak melengkung) */
+            text-align: justify;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #e0e0e0;
+            padding: 30px 50px;
+            text-align: left;
+            margin-top: 40px;
+        }
+        footer h3 { margin: 0 0 5px 0; }
+        footer p { margin: 0; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <!-- Lagu Latar -->
+    <audio id="lagu-background" autoplay loop>
+        <source src="sabilulungan.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Script Penyambung Lagu -->
+    <script>
+        const audioLatar = document.getElementById("lagu-background");
+
+        // 1. Saat halaman baru kebuka, cek apakah ada rekaman waktu sebelumnya
+        window.addEventListener("DOMContentLoaded", function() {
+            const waktuTersimpan = sessionStorage.getItem("waktuLagu");
+            if (waktuTersimpan) {
+                audioLatar.currentTime = waktuTersimpan; // Lanjutin ke detik yang tersimpan
+            }
+        });
+
+        // 2. Saat tombol diklik dan halaman mau pindah, simpan detik lagunya
+        window.addEventListener("beforeunload", function() {
+            sessionStorage.setItem("waktuLagu", audioLatar.currentTime);
+        });
+    </script>
+
+    <!-- Navbar -->
+    <nav>
+        <h2>BatikPedia</h2>
+        <div>
+            <a href="index.html">Beranda</a>
+            <a href="galeri.html">Galeri Motif</a>
+            <a href="#">Filosofi Batik</a>
+            <a href="tentang.html" class="active">Tentang</a> <!-- Active di sini -->
+        </div>
+    </nav>
+
+    <!-- Konten Halaman Tentang -->
+    <div class="tentang-container">
+        
+        <!-- Seksi Tim Pengembang -->
+        <h2 class="section-title">Tim Pengembang</h2>
+        <div class="team-grid">
+            <div class="member">
+                <img src="foto_renaldi.jpg" alt="Foto Renaldi">
+                <h4>Renaldi</h4>
+                <p>Project Manager</p>
+            </div>
+            <div class="member">
+                <img src="foto_rayhan.jpg" alt="Foto Rayhan">
+                <h4>Muhamad Rayhan Adrian</h4>
+                <p>Analyst</p>
+            </div>
+            <div class="member">
+                <img src="foto_farhan.jpg" alt="Foto Farhan">
+                <h4>Muhammad Farhan</h4>
+                <p>Designer</p>
+            </div>
+            <div class="member">
+                <img src="foto_daffa.jpg" alt="Foto Daffa">
+                <h4>Daffa Dio Fahreza</h4>
+                <p>Content Creative</p>
+            </div>
+            <div class="member">
+                <img src="foto_komang.jpg" alt="Foto Komang">
+                <h4>Komang Agus Raditya</h4>
+                <p>Editor</p>
+            </div>
+            <div class="member">
+                <img src="foto_rafli.jpg" alt="Foto Rafli">
+                <h4>Muhammad Rafli Faisal</h4>
+                <p>Programmer</p>
+            </div>
+        </div>
+
+        <!-- Seksi Tujuan Proyek -->
+        <h2 class="section-title">Tujuan Proyek</h2>
+        <div class="purpose-box">
+            Proyek "BatikPedia" kemungkinan besar bertujuan menjadi ensiklopedia digital dan pusat edukasi untuk mendokumentasikan berbagai motif batik nusantara beserta makna filosofisnya. Melalui platform ini, pelestarian budaya dapat dilakukan dengan lebih modern sehingga warisan leluhur lebih mudah diakses, dipelajari, dan didokumentasikan dengan aman. Selain menyajikan katalog visual yang merangkum detail pola secara terstruktur, proyek ini juga berpotensi menjadi wadah pendukung UMKM sebagai etalase digital yang membantu para pengrajin lokal memasarkan karya mereka secara lebih luas.
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <h3>BatikPedia</h3>
+        <p>2026 Batik Khas Jawa Barat</p>
+    </footer>
+
+</body>
+</html>

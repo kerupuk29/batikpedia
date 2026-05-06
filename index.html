@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>BatikPedia</title>
+    <style>
+        /* Gaya Dasar */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        /* Navbar - Dibikin Melayang & Transparan */
+        nav {
+            position: absolute; /* Bikin navbar numpang di atas banner */
+            top: 0;
+            width: 100%;
+            box-sizing: border-box; /* Biar padding gak bikin layar geser/scroll ke samping */
+            background-color: transparent; /* Hapus warna solid */
+            color: white;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10; /* Memastikan menu selalu di lapisan paling depan */
+        }
+        nav h2 { 
+            margin: 0; 
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Efek bayangan biar teks jelas */
+        }
+        nav div a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: bold;
+            font-size: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            transition: color 0.3s;
+        }
+        nav div a:hover {
+            color: #d1d1d1; /* Efek pas menu disentuh mouse */
+        }
+
+        /* Banner Utama (Kolase 4 Batik) */
+        .banner-grid {
+            position: relative; 
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr; 
+            height: 100vh; /* <-- UBAH BAGIAN INI JADI 100vh */
+            width: 100%;
+        }
+
+        /* Efek Fade Hitam Memudar (Gradient Overlay) */
+        .banner-grid::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40%; /* Seberapa jauh fadenya turun ke bawah */
+            background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0) 100%);
+            pointer-events: none; /* Biar fadenya cuma visual, gak nutupin interaksi klik */
+        }
+
+        .banner-grid div {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+        }
+        .banner-grid div img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+        }
+
+        /* Seksi Konten (Galeri & Filosofi) - Sisa kodenya tetep sama */
+        .section-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 50px; 
+            gap: 50px;
+        }
+        .section-container img {
+            width: 400px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        }
+        .section-text {
+            max-width: 450px;
+        }
+        .section-text h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .section-text p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: #e0e0e0;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background-color: #ccc; 
+        }
+
+        /* Footer */
+        footer {
+            background-color: #e0e0e0;
+            padding: 30px 50px;
+            text-align: left;
+            margin-top: 20px;
+        }
+        footer h3 {
+            margin: 0 0 5px 0;
+        }
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Lagu Latar -->
+    <audio id="lagu-background" autoplay loop>
+        <source src="sabilulungan.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Script Penyambung Lagu -->
+    <script>
+        const audioLatar = document.getElementById("lagu-background");
+
+        // 1. Saat halaman baru kebuka, cek apakah ada rekaman waktu sebelumnya
+        window.addEventListener("DOMContentLoaded", function() {
+            const waktuTersimpan = sessionStorage.getItem("waktuLagu");
+            if (waktuTersimpan) {
+                audioLatar.currentTime = waktuTersimpan; // Lanjutin ke detik yang tersimpan
+            }
+        });
+
+        // 2. Saat tombol diklik dan halaman mau pindah, simpan detik lagunya
+        window.addEventListener("beforeunload", function() {
+            sessionStorage.setItem("waktuLagu", audioLatar.currentTime);
+        });
+    </script>
+
+    <!-- Navbar -->
+    <nav>
+        <h2>BatikPedia</h2>
+        <div>
+            <a href="#">Beranda</a>
+            <a href="galeri.html">Galeri Motif</a>
+            <a href="#">Filosofi Batik</a>
+            <a href="tentang.html">Tentang</a>
+        </div>
+    </nav>
+
+    <!-- Banner Utama (Kolase) -->
+    <div class="banner-grid">
+        <!-- Kode styling dihilangkan dari sini karena sudah dipindah ke bagian CSS di atas -->
+        <div><img src="megamendung.jpg" alt="Batik 1"></div>
+        <div><img src="tulis_garutan.jpg" alt="Batik 2"></div>
+        <div><img src="priyangan.jpg" alt="Batik 3"></div>
+        <div><img src="kujang_merah.jpg" alt="Batik 4"></div>
+    </div>
+
+    <!-- Seksi Galeri Motif -->
+    <div class="section-container">
+        <img src="foto_pengrajin.jpg" alt="Ilustrasi Pengrajin">
+        <div class="section-text">
+            <h2>Kunjungi Galeri Motif</h2>
+            <p>Temukan pakaian tekstil langka beresolusi tinggi dan temukan makna filosofis di balik pola tradisional yang diwariskan dari generasi ke generasi.</p>
+            <a href="galeri.html" class="btn">Lihat Koleksi ➔</a>
+        </div>
+    </div>
+
+    <!-- Seksi Filosofi Batik -->
+    <div class="section-container" style="background-color: #f9f9f9;">
+        <!-- Tambahan warna background abu-abu tipis khusus di seksi ini biar ada pemisah -->
+        <div class="section-text">
+            <h2>Tonton Filosofi Batik</h2>
+            <p>Benamkan diri Anda dalam proses penciptaan yang berirama melalui film dokumenter intim yang menampilkan para perajin ahli dan teknik abadi mereka.</p>
+            <a href="#" class="btn">Tonton Sekarang ➔</a>
+        </div>
+        <img src="foto_membatik.jpg" alt="Thumbnail Video">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <h3>BatikPedia</h3>
+        <p>2026 Batik Khas Jawa Barat</p>
+    </footer>
+
+</body>
+</html>
