@@ -116,25 +116,49 @@
 <body>
 
     <!-- Lagu Latar -->
-    <audio id="lagu-background" autoplay loop>
-        <source src="sabilulungan.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="lagu-background"></audio>
 
     <!-- Script Penyambung Lagu -->
     <script>
         const audioLatar = document.getElementById("lagu-background");
+        const sudahDisapa = sessionStorage.getItem("sudahDisapa");
+        const waktuTersimpan = sessionStorage.getItem("waktuLagu");
 
-        // 1. Saat halaman baru kebuka, cek apakah ada rekaman waktu sebelumnya
         window.addEventListener("DOMContentLoaded", function() {
-            const waktuTersimpan = sessionStorage.getItem("waktuLagu");
-            if (waktuTersimpan) {
-                audioLatar.currentTime = waktuTersimpan; // Lanjutin ke detik yang tersimpan
+            if (!sudahDisapa) {
+                // SKENARIO 1: Baru pertama kali buka aplikasi
+                sessionStorage.setItem("sudahDisapa", "true"); // Langsung catat biar nggak ngulang
+                
+                audioLatar.src = "pembuka.mp3"; // Putar suara pembuka
+                audioLatar.loop = false; // Jangan diulang
+                audioLatar.play();
+
+                // Kalau pembuka udah selesai, otomatis ganti ke gamelan
+                audioLatar.addEventListener("ended", function() {
+                    audioLatar.src = "sabilulungan.mp3";
+                    audioLatar.loop = true; // Gamelan muter terus
+                    audioLatar.play();
+                });
+
+            } else {
+                // SKENARIO 2: Cuma pindah halaman, langsung lanjut gamelan
+                audioLatar.src = "sabilulungan.mp3";
+                audioLatar.loop = true;
+                
+                // Lanjutin di detik terakhir
+                if (waktuTersimpan) {
+                    audioLatar.currentTime = waktuTersimpan;
+                }
+                audioLatar.play();
             }
         });
 
-        // 2. Saat tombol diklik dan halaman mau pindah, simpan detik lagunya
+        // Saat tombol diklik dan halaman mau pindah, simpan detik lagunya
         window.addEventListener("beforeunload", function() {
-            sessionStorage.setItem("waktuLagu", audioLatar.currentTime);
+            // Pastikan yang disimpan cuma durasi gamelan (jaga-jaga kalau pembuka belum beres tapi user udah pindah halaman)
+            if (audioLatar.src.includes("sabilulungan.mp3")) {
+                sessionStorage.setItem("waktuLagu", audioLatar.currentTime);
+            }
         });
     </script>
 
