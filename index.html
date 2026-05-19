@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>BatikPedia</title>
+
     <style>
         /* Gaya Dasar */
         body {
@@ -13,26 +14,69 @@
             background-color: #ffffff;
         }
 
-        /* Navbar - Dibikin Melayang & Transparan */
+        /* Navbar - Melayang & Transparan */
         nav {
-            position: absolute; /* Bikin navbar numpang di atas banner */
+            position: absolute;
             top: 0;
             width: 100%;
-            box-sizing: border-box; /* Biar padding gak bikin layar geser/scroll ke samping */
-            background-color: transparent; /* Hapus warna solid */
+            box-sizing: border-box;
+            background-color: transparent;
             color: white;
             padding: 25px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 10; /* Memastikan menu selalu di lapisan paling depan */
+            z-index: 10;
         }
-        nav h2 { 
-            margin: 0; 
+
+        /* Sisi kiri navbar: Logo + Tombol Mute */
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        nav h2 {
+            margin: 0;
             font-size: 28px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Efek bayangan biar teks jelas */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
-        nav div a {
+
+        /* ===== TOMBOL MUTE/UNMUTE ===== */
+        #btn-mute {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            color: white;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.25s, transform 0.15s, border-color 0.25s;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+            flex-shrink: 0;
+        }
+
+        #btn-mute:hover {
+            background: rgba(255, 255, 255, 0.30);
+            border-color: white;
+            transform: scale(1.1);
+        }
+
+        #btn-mute:active {
+            transform: scale(0.95);
+        }
+
+        #btn-mute.muted {
+            background: rgba(255, 80, 80, 0.25);
+            border-color: rgba(255, 150, 150, 0.8);
+        }
+
+        /* Menu kanan */
+        nav .nav-right a {
             color: white;
             text-decoration: none;
             margin-left: 25px;
@@ -41,69 +85,80 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
             transition: color 0.3s;
         }
-        nav div a:hover {
-            color: #d1d1d1; /* Efek pas menu disentuh mouse */
+
+        nav .nav-right a:hover {
+            color: #d1d1d1;
         }
 
         /* Banner Utama (Kolase 4 Batik) */
         .banner-grid {
-            position: relative; 
+            position: relative;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr; 
-            height: 100vh; /* <-- UBAH BAGIAN INI JADI 100vh */
+            grid-template-rows: 1fr 1fr;
+            height: 100vh;
             width: 100%;
         }
 
-        /* Efek Fade Hitam Memudar (Gradient Overlay) */
         .banner-grid::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 40%; /* Seberapa jauh fadenya turun ke bawah */
-            background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0) 100%);
-            pointer-events: none; /* Biar fadenya cuma visual, gak nutupin interaksi klik */
+            height: 40%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.95) 0%,
+                rgba(0,0,0,0.6) 30%,
+                rgba(0,0,0,0) 100%
+            );
+            pointer-events: none;
         }
 
         .banner-grid div {
             width: 100%;
             height: 100%;
-            overflow: hidden; 
+            overflow: hidden;
         }
+
         .banner-grid div img {
             width: 100%;
             height: 100%;
-            object-fit: cover; 
+            object-fit: cover;
         }
 
-        /* Seksi Konten (Galeri & Filosofi) - Sisa kodenya tetep sama */
+        /* Seksi Konten */
         .section-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 80px 50px; 
+            padding: 80px 50px;
             gap: 50px;
         }
+
         .section-container img {
             width: 400px;
             height: 280px;
             object-fit: cover;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
+
         .section-text {
             max-width: 450px;
         }
+
         .section-text h2 {
             font-size: 28px;
             margin-bottom: 10px;
         }
+
         .section-text p {
             line-height: 1.6;
             margin-bottom: 20px;
         }
+
         .btn {
             display: inline-block;
             padding: 10px 25px;
@@ -114,8 +169,9 @@
             font-weight: bold;
             transition: background 0.3s;
         }
+
         .btn:hover {
-            background-color: #ccc; 
+            background-color: #ccc;
         }
 
         /* Footer */
@@ -125,102 +181,242 @@
             text-align: left;
             margin-top: 20px;
         }
+
         footer h3 {
             margin: 0 0 5px 0;
         }
+
         footer p {
             margin: 0;
             font-size: 14px;
         }
     </style>
 </head>
+
 <body>
 
-    <!-- Lagu Latar -->
-    <audio id="lagu-background" autoplay></audio>
+    <!-- AUDIO -->
+<audio id="lagu-background"></audio>
 
-    <!-- Script Penyambung Lagu -->
-    <script>
-        const audioLatar = document.getElementById("lagu-background");
-        const sudahDisapa = sessionStorage.getItem("sudahDisapa");
+<script>
+    const audioLatar = document.getElementById("lagu-background");
+    let btnMute;
+
+    // =========================
+    // SAAT HALAMAN SIAP
+    // =========================
+    window.addEventListener("DOMContentLoaded", function () {
+
+        btnMute = document.getElementById("btn-mute");
+
+        // Ambil status mute
+        const statusMute = sessionStorage.getItem("statusMute");
+
+        if (statusMute === "true") {
+            audioLatar.muted = true;
+
+            btnMute.textContent = "🔇";
+            btnMute.title = "Unmute musik";
+            btnMute.classList.add("muted");
+
+        } else {
+            audioLatar.muted = false;
+
+            btnMute.textContent = "🔊";
+            btnMute.title = "Mute musik";
+            btnMute.classList.remove("muted");
+        }
+
+        // CEK apakah intro sudah pernah diputar
+        const introSudahDiputar = sessionStorage.getItem("introSudahDiputar");
+
+        // =========================
+        // JIKA BELUM → PUTAR INTRO
+        // =========================
+        if (!introSudahDiputar) {
+
+            audioLatar.src = "pembuka.mp3";
+            audioLatar.loop = false;
+
+            mulaiAudio();
+
+            audioLatar.addEventListener("ended", function () {
+
+                // tandai intro sudah selesai
+                sessionStorage.setItem("introSudahDiputar", "true");
+
+                putarLaguUtama();
+
+            });
+
+        } 
+        
+        // =========================
+        // JIKA SUDAH → LANGSUNG LAGU UTAMA
+        // =========================
+        else {
+
+            putarLaguUtama();
+        }
+    });
+
+    // =========================
+    // FUNGSI PUTAR AUDIO
+    // =========================
+    function mulaiAudio() {
+
+        const playPromise = audioLatar.play();
+
+        if (playPromise !== undefined) {
+
+            playPromise.catch(() => {
+
+                // Browser blok autoplay
+                document.body.addEventListener("click", function klikPertama() {
+
+                    audioLatar.play();
+
+                }, { once: true });
+
+            });
+        }
+    }
+
+    // =========================
+    // PUTAR LAGU UTAMA
+    // =========================
+    function putarLaguUtama() {
+
+        audioLatar.src = "alam_sunda.mp3";
+        audioLatar.loop = true;
+
+        // lanjut dari waktu terakhir
         const waktuTersimpan = sessionStorage.getItem("waktuLagu");
 
-        window.addEventListener("DOMContentLoaded", function() {
-            if (!sudahDisapa) {
-                // SKENARIO 1: Baru pertama kali buka aplikasi
-                sessionStorage.setItem("sudahDisapa", "true"); // Langsung catat biar nggak ngulang
-                
-                audioLatar.src = "pembuka.mp3"; // Putar suara pembuka
-                audioLatar.loop = false; // Jangan diulang
-                audioLatar.play();
+        if (waktuTersimpan) {
+            audioLatar.currentTime = parseFloat(waktuTersimpan);
+        }
 
-                // Kalau pembuka udah selesai, otomatis ganti ke gamelan
-                audioLatar.addEventListener("ended", function() {
-                    audioLatar.src = "sabilulungan.mp3";
-                    audioLatar.loop = true; // Gamelan muter terus
-                    audioLatar.play();
-                });
+        mulaiAudio();
+    }
 
-            } else {
-                // SKENARIO 2: Cuma pindah halaman, langsung lanjut gamelan
-                audioLatar.src = "sabilulungan.mp3";
-                audioLatar.loop = true;
-                
-                // Lanjutin di detik terakhir
-                if (waktuTersimpan) {
-                    audioLatar.currentTime = waktuTersimpan;
-                }
-                audioLatar.play();
-            }
-        });
+    // =========================
+    // SIMPAN POSISI LAGU
+    // =========================
+    window.addEventListener("beforeunload", function () {
 
-        // Saat tombol diklik dan halaman mau pindah, simpan detik lagunya
-        window.addEventListener("beforeunload", function() {
-            // Pastikan yang disimpan cuma durasi gamelan (jaga-jaga kalau pembuka belum beres tapi user udah pindah halaman)
-            if (audioLatar.src.includes("sabilulungan.mp3")) {
-                sessionStorage.setItem("waktuLagu", audioLatar.currentTime);
-            }
-        });
-    </script>
+        if (audioLatar.src.includes("alam_sunda.mp3")) {
+
+            sessionStorage.setItem(
+                "waktuLagu",
+                audioLatar.currentTime
+            );
+        }
+
+        sessionStorage.setItem(
+            "statusMute",
+            audioLatar.muted
+        );
+    });
+
+    // =========================
+    // TOMBOL MUTE
+    // =========================
+    function toggleMute() {
+
+        audioLatar.muted = !audioLatar.muted;
+
+        if (audioLatar.muted) {
+
+            btnMute.textContent = "🔇";
+            btnMute.title = "Unmute musik";
+            btnMute.classList.add("muted");
+
+        } else {
+
+            btnMute.textContent = "🔊";
+            btnMute.title = "Mute musik";
+            btnMute.classList.remove("muted");
+        }
+
+        sessionStorage.setItem(
+            "statusMute",
+            audioLatar.muted
+        );
+    }
+</script>
 
     <!-- Navbar -->
     <nav>
-        <h2>BatikPedia</h2>
-        <div>
+
+        <!-- KIRI -->
+        <div class="nav-left">
+            <h2>BatikPedia</h2>
+
+            <button
+                id="btn-mute"
+                onclick="toggleMute()"
+                title="Mute musik"
+            >
+                🔊
+            </button>
+        </div>
+
+        <!-- KANAN -->
+        <div class="nav-right">
             <a href="#">Beranda</a>
             <a href="galeri.html">Galeri Motif</a>
             <a href="#">Filosofi Batik</a>
             <a href="tentang.html">Tentang</a>
         </div>
+
     </nav>
 
-    <!-- Banner Utama (Kolase) -->
+    <!-- Banner Utama -->
     <div class="banner-grid">
-        <!-- Kode styling dihilangkan dari sini karena sudah dipindah ke bagian CSS di atas -->
         <div><img src="megamendung.jpg" alt="Batik 1"></div>
         <div><img src="tulis_garutan.jpg" alt="Batik 2"></div>
         <div><img src="priyangan.jpg" alt="Batik 3"></div>
         <div><img src="kujang_merah.jpg" alt="Batik 4"></div>
     </div>
 
-    <!-- Seksi Galeri Motif -->
+    <!-- Seksi Galeri -->
     <div class="section-container">
         <img src="foto_pengrajin.jpg" alt="Ilustrasi Pengrajin">
+
         <div class="section-text">
             <h2>Kunjungi Galeri Motif</h2>
-            <p>Temukan pakaian tekstil langka beresolusi tinggi dan temukan makna filosofis di balik pola tradisional yang diwariskan dari generasi ke generasi.</p>
-            <a href="galeri.html" class="btn">Lihat Koleksi ➔</a>
+
+            <p>
+                Temukan pakaian tekstil langka beresolusi tinggi
+                dan temukan makna filosofis di balik pola tradisional
+                yang diwariskan dari generasi ke generasi.
+            </p>
+
+            <a href="galeri.html" class="btn">
+                Lihat Koleksi ➔
+            </a>
         </div>
     </div>
 
-    <!-- Seksi Filosofi Batik -->
+    <!-- Seksi Filosofi -->
     <div class="section-container" style="background-color: #f9f9f9;">
-        <!-- Tambahan warna background abu-abu tipis khusus di seksi ini biar ada pemisah -->
+
         <div class="section-text">
             <h2>Tonton Filosofi Batik</h2>
-            <p>Benamkan diri Anda dalam proses penciptaan yang berirama melalui film dokumenter intim yang menampilkan para perajin ahli dan teknik abadi mereka.</p>
-            <a href="#" class="btn">Tonton Sekarang ➔</a>
+
+            <p>
+                Benamkan diri Anda dalam proses penciptaan
+                yang berirama melalui film dokumenter intim
+                yang menampilkan para perajin ahli dan
+                teknik abadi mereka.
+            </p>
+
+            <a href="#" class="btn">
+                Tonton Sekarang ➔
+            </a>
         </div>
+
         <img src="foto_membatik.jpg" alt="Thumbnail Video">
     </div>
 
